@@ -1,0 +1,73 @@
+<% include partials/header %>
+<div class="container">
+  <% var price1 = 45.00 %>
+<h1><%= currentUser.firstName %> <%= currentUser.lastName %>'s Cart</h1>
+<div>
+    <h2>My tickets:</h2>
+    <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Wrestling Men Semi-final
+        </button>
+      </h2>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <h4>Ticket holder: </h4> 
+        <p><%= currentUser.firstName %> <%= currentUser.lastName %></p>
+        <h4>Ticket's ID:</h4>
+        <p>854325290825942</p>
+        <h4>Price:</h4>
+        <p><%=  price1 %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% var total = 0; %>
+<% tickets.forEach(function(ticket){ %>
+  <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <%= ticket.title %>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <h4>Ticket holder: </h4> 
+        <p><%= currentUser.firstName %> <%= currentUser.lastName %></p>
+        <h4>Ticket's ID:</h4>
+        <p><%= ticket._id %></p>
+        <h4>Price:</h4>
+        <p>$<%= parseInt(ticket.price) %></p>
+      </div>
+      <% total += parseInt(ticket.price) %>
+    </div>
+  </div>
+</div>
+<% }) 
+var tax = total* 0.07;
+%>
+
+<div>
+    <h2>Tax: $<%= tax %></h2>
+    <% total = total + price1 + tax %>
+    <% if(currentUser.role === "employee" || currentUser.role === "athlete"){ %>
+    <%=  total = 0 ; %>
+    <% } %>
+    <h2>Total Amount: $<%= total %></h2>
+    <% if(currentUser.role === "employee" || currentUser.role === "athlete"){ %>
+    <%=  total = 0 ; %>
+    <% } %>
+    <a href="/confirm"><button class="btn btn-primary">Check out</button></a>
+</div>
+
+<div>
+    <img style="width:600px;" src="https://cdn.theatlantic.com/assets/media/img/photo/2016/08/rio-2016-photos-from-days-11-throug/r35_591631158/main_1200.jpg?1471544648">
+</div>
+
+</div>

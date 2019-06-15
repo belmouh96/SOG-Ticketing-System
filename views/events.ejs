@@ -1,0 +1,24 @@
+<% include partials/header %>
+
+
+<div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">The Summer Olympic Games</h1>
+            <p class="lead">This is a the official website of the RIO Olympic Games. Tickets for different events are on sale now.</p>
+            <hr class="my-4">
+            <p>Purchase your ticket now</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Events</a>
+        </div>
+    </div>
+    
+<div class="container">
+    <% sports.forEach(function(sport){ %>
+    <div class="cards">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= sport.image %>" alt="Card image cap">
+        <div class="card-body">
+          <a class="btn btn-primary" href="/events/<%= sport._id %>"><%= sport.name %> Events</a>
+        </div>
+      </div>
+    </div>
+    <% }) %>
